@@ -1,4 +1,4 @@
-# Online-PD-Risk-Score_Calculator
+# Online-PD-Risk-Score-Calculator
 **Calculator for PD risk scores** 
 
 IPDGC Hackathon 2019
