@@ -9,24 +9,14 @@
 
 
 library(shiny)
-#library(scales)
-#library(tm)
-#library(wordcloud)
-#library(SnowballC)
-#library(rvest)
-#library(dplyr)
-#library(reshape2)
-#library(syuzhet)
-#library(pander)
-#library(xlsx)
 library(ggplot2)
-#library(RWeka)
-#library(RWekajars)
-#library(partykit)
-#library(DT)
+library(data.table)
+library(optparse)
+library(methods)
+library(tools)
+library(RColorBrewer)
 library(shinydashboard)
-#library(qdap)
-#library(rJava)
+
 
 #romeo <- readLines("romeo.txt")
 #othello <- readLines("othello.txt")
@@ -42,7 +32,7 @@ ui <- dashboardPage(skin = "blue",
                         ##Tab One
                         menuItem("File Upload",tabName = "file",icon = icon("file-text-o")),
                         ##Tab Two
-                        menuItem("Text Output",tabName = "text",icon = icon("file-text-o"))
+                        menuItem("PRS Result",tabName = "text",icon = icon("bar-chart-o"))
                       )),
                     
                     ###Beginning of Dashboard Body <selection>####
@@ -53,18 +43,18 @@ ui <- dashboardPage(skin = "blue",
                                 fileInput("selection", "Upload Plink bfiles:",multiple = TRUE),
                                 helpText(paste("Please upload Plink bfiles with the samples", 
                                                "you would like to analyze.")
-                                         ),
-                                box(actionButton("prsTable","Create PRS Table"),
-                                    br(),
-                                    br(),
-                                    downloadButton("downloadtwo", label="Download PRS Table")
-                                    )
+                                         )
+                                
                                 ),
                         ###Text Output Tab####
                         tabItem(tabName = "text",
                                 helpText(paste("This tab displays the PRS plot.")),
-                                actionButton("display","Display Text"),
-                                downloadButton(outputId = "downloadsix",label = "Download PRS plot"),
+                                box(actionButton("prsTable","Create PRS Table"),
+                                    br(),
+                                    br(),
+                                    downloadButton("downloadtwo", label="Download PRS Table"),
+                                    downloadButton(outputId = "downloadsix",label = "Download PRS plot")
+                                ),
                                 br(),
                                 br(),
                                 plotOutput("plot2"))
@@ -81,6 +71,7 @@ server <- function(input, output, session) {
   ##Code for uploading Text File from User ##########
   
   ford <- reactive({ 
+    
     req(input$selection) ## ?req #  require that the input is available
     
     inFile <- input$selection 
@@ -91,9 +82,7 @@ server <- function(input, output, session) {
     
   })
   
-  #for(i in 1:length(input$selection[,1])){
-  #  lst[[i]] <- read.csv(input$selection[[i, 'datapath']])
-  #}
+  
   
   ## Download code for wordcloud picture download ####
   
@@ -183,6 +172,49 @@ server <- function(input, output, session) {
                 position=position_dodge(.9), size=4)+labs(title="Positive vs. Negative Sentiment",y = "Percentage",x="Sentiment")+
       theme(panel.background = element_blank())
   })
+  
+  prs <- reactive({
+    
+    #for(i in 1:length(input$selection[,1])){
+    #  lst[[i]] <- read.csv(input$selection[[i, 'datapath']])
+    #}
+    bfile <- input$selection[[, 'datapath']]
+    plink_name <- input$selection[[, 'name']]
+    
+    file.rename(bfile[grep('bed',plink_name)],"test.bed")
+    file.rename(bfile[grep('bim',plink_name)],"test.bim")
+    file.rename(bfile[grep('fam',plink_name)],"test.fam")
+    
+    
+    prs_per_sample <- system(paste0("Rscript PRSice.R --cov-file PCs.eigenvec_concate.txt --out \
+$outfile -t test -b SPAIN3.meta --beta --snp MarkerName \
+--A1 Allele1 --A2 Allele2 --stat Effect --se StdErr --pvalue P-value   \
+--print-snp --score std --prsice . \
+-n 24 --binary-target T --quantile 4 --prevalence 0.005 --bar-levels 5E-8,5E-7,5E-6,5E-5,5E-4,5E-3,5E-2,5E-1,1\
+--fastscore
+"))
+    
+    
+    
+  })
+  
+  observeEvent(input$wbdown,{output$wordbreakdown<-DT::renderDataTable({
+    withProgress(message = 'Creating Word Breakdown',
+                 value = 0, {
+                   for (i in 1:3) {
+                     incProgress(1/3)
+                     Sys.sleep(0.25)
+                   }
+                 },env = parent.frame(n=1))
+    
+    #worddatabreakdown<- as.matrix.data.frame(texterdf3())  
+    
+    #wordatabreakdown <- worddatabreakdown[,1:2]
+    #wordatabreakdown
+    
+    prs_per_sample
+    
+  })})
   
   
 }
