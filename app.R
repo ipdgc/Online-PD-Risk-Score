@@ -25,7 +25,9 @@ library(shinydashboard)
 
 ###Dashboard Beginning for Text Analysis App ######
 ui <- dashboardPage(skin = "blue",
-                    dashboardHeader(title = "Polygenic Risk Score Calculator"),
+                    #dashboardHeader(title = "Polygenic Risk Score Calculator"),
+                    dashboardHeader(title = tags$a(href='http://pdgenetics.org',
+                                                   tags$img(src='IPDGC-logo.png'))),
                     ###Dashboard Sidebar Menu####
                     dashboardSidebar(
                       sidebarMenu(
@@ -40,10 +42,10 @@ ui <- dashboardPage(skin = "blue",
                       tabItems(
                     ###File Upload Tab###
                         tabItem(tabName = "file",
+                                titlePanel("Polygenic Risk Score Calculator."),
                                 fileInput("selection", "Upload Plink bfiles:",multiple = TRUE),
-                                helpText(paste("Please upload Plink bfiles with the samples", 
+                                helpText("Please upload Plink bfiles with the samples", 
                                                "you would like to analyze.")
-                                         )
                                 
                                 ),
                         ###Text Output Tab####
@@ -186,15 +188,11 @@ server <- function(input, output, session) {
     file.rename(bfile[grep('fam',plink_name)],"test.fam")
     
     
-    prs_per_sample <- system(paste0("Rscript PRSice.R --cov-file PCs.eigenvec_concate.txt --out \
-$outfile -t test -b SPAIN3.meta --beta --snp MarkerName \
---A1 Allele1 --A2 Allele2 --stat Effect --se StdErr --pvalue P-value   \
---print-snp --score std --prsice . \
--n 24 --binary-target T --quantile 4 --prevalence 0.005 --bar-levels 5E-8,5E-7,5E-6,5E-5,5E-4,5E-3,5E-2,5E-1,1\
---fastscore
-"))
-    
-    
+     system(paste0("Rscript PRSice.R --target PRS_INPUT_french-canadian ",
+                   "--base PD_risk-profile.txt --stat beta ",
+                   "--snp MarkerName --A1 Allele1 --score avg --binary-target T ",
+                   "--prsice PRSice_win64.exe --quantile 4 --prevalence 0.005 ",
+                   "--A2 Allele2 --pvalue P-value --fastscore"))
     
   })
   
