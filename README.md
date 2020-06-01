@@ -1,5 +1,16 @@
-# Online-PD-Risk-Score-Calculator
-**Calculator for PD risk scores** 
-London IPDGC Hackathon 2019
+# Online PD Risk Score Platform
 
-Google Folder: https://drive.google.com/drive/folders/12vrorsgrlp7HTTAW0sGDRlbXTEBp4So1?usp=sharing 
+## Motivation 
+
+## General Information 
+- Contributors:
+- Online README: https://demo.codimd.org/khJgourfSIKQDCaiv6OYzA 
+- Google Drive: 
+
+## Goals 
+
+## Timeline 
+
+## Requirements 
+
+## Resources
