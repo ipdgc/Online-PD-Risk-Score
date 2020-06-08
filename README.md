@@ -1,16 +1,76 @@
 # Online PD Risk Score Platform
 
 ## Motivation 
+Generating risk scores is becoming more common, but what do they mean? Here, we are putting together a website with context around risk scores, the different types, how they translate into different populations, and publications. Also, we are creating a series of notebooks that can be deployed in a containerized Binder to calculate risk scores for your own data, linked on the website. 
+
+In the future, plans include incorporating a calculator directly into the website, but we saw merit in developing both these sections individually. 
+
+Website: https://rb.gy/bcvvy1
+Notebook Binder: `Coming Soon!`
+
 
 ## General Information 
 - Contributors:
+    - Mary B. Makarious, NIA, NIH
+    - Anni Moore, NIA, NIH
+    - Eric Yu, McGill University 
+    - Bernabe Bustos, Northwestern University
+    - Ignacio Juan Keller Sarmiento, Northwestern University
+    - Mohammad Dehestani, University of Tübingen
+    - Hui Lui, University of Tübingen
+
+- Website: https://ipdgc.github.io/Online-PD-Risk-Score/ 
 - Online README: https://demo.codimd.org/khJgourfSIKQDCaiv6OYzA 
 - Google Drive: https://drive.google.com/drive/folders/19KPc3c3Oh5FYGD66g8nhNeRNt2XKbWMs?usp=sharing
 
-## Goals 
 
-## Timeline 
+## Hackathon
 
-## Requirements 
+### Responsibilities 
+- Website Team:
+    - Updates and maintains the website 
+    - Helps updating the GitHub README to meet Hackthon deadlines
+    - Helps with the other teams responsibilities
+    - Help design IPDGC presentation
+- Content Curating Team:
+    - Look through papers/publications
+    - Look through online resources
+    - Consolidate statistics we can report
+    - Think of interesting ways to visualize the data in a meaningful way
+    - Help design IPDGC presentation
+- Code Development Team: 
+    - Look through online resources that go through how to calculate these things
+    - Start putting together a notebook in Jupyter 
+    - Calculate quartiles based on META5 data
+    - Help design IPDGC presentation 
 
-## Resources
+### Roles
+- Website Team:
+    - Mary
+    - Bernabe
+- Content Curating Team:
+    - Mary
+    - Eric 
+    - Bernabe 
+    - Ignacio
+- Code Development Team: 
+    - Mo 
+    - Hui
+    - Eric
+    - Mary
+    - Anni
+
+### Goals 
+- [x] Publish draft website 
+- [x] Running PRSice on French Canadian dataset
+- [x] Running PLINK on French Canadian dataset
+- [ ] Adding R Script to GitHub repository 
+- [ ] Adding notebook to GitHub repository
+- [ ] Cleaning up scripts and adding context 
+- [ ] Generating binder for scripts 
+- [ ] Literature search to Anni's doc
+- [ ] Clean up literature search for website 
+- [ ] ???  
+
+
+
