@@ -1,0 +1,28 @@
+PLINK v1.90b6.17 64-bit (28 Apr 2020)
+Options in effect:
+  --bfile PRS_INPUT_french-canadian
+  --out PRS_OUTPUT
+  --score PD_risk-profile.txt 2 3 6 header
+
+Hostname: MININT-G777PH
+Working directory: C:\Users\Jia\onlinePRS\plink
+Start time: Mon Jun 08 13:43:15 2020
+
+Random number seed: 1591638195
+8095 MB RAM detected; reserving 4047 MB for main workspace.
+90 variants loaded from .bim file.
+1653 people (934 males, 706 females, 13 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to PRS_OUTPUT.nosex .
+1648 phenotype values loaded from .fam.
+Warning: Ignoring phenotypes of missing-sex samples.  If you don't want those
+phenotypes to be ignored, use the --allow-no-sex flag.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 1653 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+90 variants and 1653 people pass filters and QC.
+Among remaining phenotypes, 733 are cases and 902 are controls.  (18 phenotypes
+are missing.)
+--score: 90 valid predictors loaded.
+--score: Results written to PRS_OUTPUT.profile .
+
+End time: Mon Jun 08 13:43:15 2020
