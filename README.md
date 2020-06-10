@@ -61,6 +61,8 @@ Notebook Binder: `Coming Soon!`
     - Mary
     - Anni
 
+## Goals
+
 ### Hackathon Goals (Mon-Tue)
 - [x] Publish draft website 
 - [x] Running PRSice on French Canadian dataset
@@ -78,9 +80,12 @@ Notebook Binder: `Coming Soon!`
 - [ ] Finish filling in website
 - [ ] Polish up code
 - [ ] Generate binder 
+- [ ] Add general PD section to website 
 
 ### Future Ideas (Beyond 2 months)
+- [ ] Incorporating other features of the disease into calculations?
 - [ ] Incorporating other diseases
 - [ ] Making calculators for other types of PRS calculations 
 - [ ] Making it possible to generate PRS for single samples 
-
+- [ ] Generate tables reporting PRS for each disease
+    - SampleID | PD_PRS | AD_PRS | PSP_PRS 
